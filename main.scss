@@ -1,0 +1,145 @@
+// Import Global Rules
+@use "./sass/layout/global-rules";
+
+// Import Pages
+@use "./sass/pages/contact";
+
+// Import Variable
+@use "./sass/variables/colors" as *;
+
+// Global Variable
+$alt_color: green;
+
+.header {
+  color: $alt_color;
+}
+
+.footer {
+  $alt_color: black !global;
+  background-color: $alt_color;
+}
+
+.copyright {
+  background-color: $alt_color;
+}
+
+.sidebar {
+  background-color: $main;
+  color: $alt;
+}
+
+$max_mobile: "max-width:576px";
+
+@media ($max_mobile) {
+  .sidebar {
+    padding: 20px;
+  }
+}
+
+/* Nesting & Parent Element */
+
+.parent {
+  font-weight: bold;
+  .child {
+    font-size: 20px;
+    .grand-child {
+      font-size: 15px;
+    }
+  }
+}
+
+.parent-one,
+.parent-two {
+  padding: 20px;
+  .child {
+    padding: 10px;
+  }
+}
+
+.parent {
+  .child {
+    font-size: 20px;
+  }
+  .test {
+    font-weight: bold;
+  }
+}
+
+.parent {
+  + p {
+    font-size: 15px;
+  }
+}
+
+.parent {
+  > {
+    .element-one {
+      font-size: 10px;
+    }
+    .element-two {
+      font-size: 10px;
+    }
+  }
+  .not-direct-child {
+    font-weight: bold;
+  }
+}
+
+.box {
+  .title {
+    font-size: 8px;
+  }
+  .description {
+    font-size: 10px;
+  }
+  &.red {
+    color: red;
+  }
+  &.green {
+    color: green;
+  }
+  &:hover {
+    background-color: #eee;
+  }
+  &:hover .title {
+    font-weight: bold;
+  }
+  :not(&) {
+    font-weight: normal;
+  }
+  [dir="rtl"] & {
+    direction: rtl;
+  }
+}
+
+// Property Declarations And Placeholder
+
+.box {
+  font-size: 20px;
+  font: {
+    size: 15px;
+    weight: bold;
+  }
+  padding: 10px;
+  margin: auto {
+    top: 10px;
+    bottom: 15px;
+  }
+}
+
+%main-box{
+  background-color: white;
+  padding:15px;
+  border:1px solid #ccc;
+}
+
+.ads{
+  @extend %main-box;
+  background-color: red;
+}
+
+.article{
+  font-size: 22px;
+  @extend %main-box;
+  color:green;
+}
