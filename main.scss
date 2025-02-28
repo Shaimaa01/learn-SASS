@@ -10,6 +10,9 @@
 // Import Mixins
 @use "./helpers/mixins" as *;
 
+// Import Functions
+@use "./helpers/functions" as *;
+
 // Global Variable
 $alt_color: green;
 
@@ -319,12 +322,12 @@ $socials: (
 
 $classes: "one" 20px red, "two" 15px green, "three" 22px blue;
 
-@each $class , $font , $color in $classes {
-  .#{$class}{
+@each $class, $font, $color in $classes {
+  .#{$class} {
     font-size: $font;
     background-color: $color;
-    color:white;
-    padding:$font / 2;
+    color: white;
+    padding: $font / 2;
   }
 }
 
@@ -342,10 +345,61 @@ $start: 1;
 
 // Create Grid System
 
-$grid_cols:12;
+$grid_cols: 12;
 
-@for $i from 1 through $grid_cols{
-  .col-#{$i}{
+@for $i from 1 through $grid_cols {
+  .col-#{$i} {
     width: percentage($i / $grid_cols);
+  }
+}
+
+// Function
+
+$width: 200px;
+
+.element {
+  width: $width;
+  height: half($width);
+  top: calculate(100px, 200px, 300px);
+}
+
+// Mixin with Content
+
+.black-overlay {
+  @include overlay(black, 0.5);
+}
+
+@include keyF(fade-in) {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@include keyF(go-up) {
+  from {
+    bottom: 0;
+  }
+  to {
+    bottom: 100px;
+  }
+}
+
+// If condition + Mixin + Content
+
+.media {
+  @include breakpoints(mobile){
+    font-size: 15px;
+  }
+  @include breakpoints(small){
+    font-size: 20px;
+  }
+  @include breakpoints(medium ){
+    font-size: 25px;
+  }
+  @include breakpoints(large){
+    font-size: 30px;
   }
 }
